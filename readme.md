@@ -1,9 +1,3 @@
-Perfect 🚀 If you’re publishing this as an **NPM package**, the README should look professional, developer-friendly, and showcase how others can install and use it.
-
-Here’s a polished **`README.md`** optimized for NPM publication:
-
----
-
 # 📦 React SideMenu
 
 A lightweight and customizable **collapsible sidebar menu** component for React.
@@ -128,9 +122,3 @@ When open:
 ## 📄 License
 
 MIT © [Your Name](https://github.com/your-username)
-
----
-
-👉 I recommend we **add `items` as a prop** so people can pass their own menu items — otherwise every project will get stuck with "Home, About, Contact".
-
-Do you want me to refactor the component and README so it supports **dynamic menu items via props** before you publish it?
