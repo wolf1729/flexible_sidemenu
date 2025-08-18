@@ -1,8 +1,9 @@
-# 📦 React SideMenu
+# 📦 Flexible SideMenu
 
-A lightweight and customizable **collapsible sidebar menu** component for React.
+A lightweight and customizable **collapsible sidebar menu** component for **React** and **Next.js** 🚀.
+Easily plug it into your project and build responsive side menus in seconds.
 
-[![NPM version](https://img.shields.io/npm/v/react-sidemenu-component.svg?style=flat)](https://www.npmjs.com/package/react-sidemenu-component)
+[![NPM version](https://img.shields.io/npm/v/flexible_sidemenu.svg?style=flat)](https://www.npmjs.com/package/flexible_sidemenu)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
@@ -25,7 +26,7 @@ yarn add flexible_sidemenu
 
 ```jsx
 import React from "react";
-import { SideMenu } from "react-sidemenu-component";
+import { SideMenu } from "flexible_sidemenu";
 
 function App() {
   return (
@@ -44,7 +45,7 @@ export default App;
 ## 🎨 Customization
 
 The component includes default styles via `SideMenu.css`.
-You can override styles or add your own:
+You can override or extend them with your own styles:
 
 ```css
 /* Example custom style */
@@ -80,45 +81,22 @@ src/
 
 ---
 
-## 📸 Demo
-
-When closed:
-
-```
-[ Open Menu ]
-```
-
-When open:
-
-```
-[ Close Menu ]
-🏠 Home
-📄 About
-📞 Contact
-```
-
----
-
 ## 📝 Development
 
 1. Clone the repo:
 
    ```bash
-   git clone https://github.com/your-username/react-sidemenu-component.git
+   git clone https://github.com/your-username/flexible_sidemenu.git
    ```
+
 2. Install dependencies:
 
    ```bash
    npm install
    ```
+
 3. Run dev server:
 
    ```bash
    npm start
    ```
-
----
-
-## 📄 License
-
-MIT © [Your Name](https://github.com/your-username)

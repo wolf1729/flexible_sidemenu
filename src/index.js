@@ -1,1 +1,1 @@
-export { default as SideMenu } from '../components/SideMenu';
+export { default as SideMenu } from "./components/sideMenu.jsx";

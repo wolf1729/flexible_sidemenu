@@ -2,6 +2,7 @@
   "name": "flexible_sidemenu",
   "version": "1.0.0",
   "description": "Your component description",
+  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "files": [

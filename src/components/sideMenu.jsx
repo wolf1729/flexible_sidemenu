@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import "./Sidebar.css";
+import "./style.css";
 
 /**
  * Represents a single sidebar item.
