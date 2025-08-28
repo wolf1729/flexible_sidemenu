@@ -1,68 +1,9 @@
-"use client";
 import { useEffect } from "react";
-import "./style.css";
+
+import SidebarItem from "./sidebarItems";
 
 /**
- * Represents a single sidebar item.
- * @typedef {Object} SidebarItemType
- * @property {string|number} id - Unique identifier for the item.
- * @property {React.ReactNode} [icon] - Optional icon displayed before the text.
- * @property {string} text - The visible label for the item.
- */
-
-/**
- * Represents a logical section inside the sidebar.
- * @typedef {Object} SidebarSection
- * @property {string} [title] - Optional section heading displayed above the items.
- * @property {SidebarItemType[]} items - List of sidebar items contained in this section.
- */
-
-/**
- * User information displayed at the bottom of the sidebar.
- * @typedef {Object} UserInfo
- * @property {string} [username] - Display name of the user.
- * @property {string} [email] - User’s email address (used as condition to show user block).
- * @property {React.ReactNode} [avatar] - Optional avatar element (e.g., image or icon).
- */
-
-/**
- * Props for the {@link SideMenu} component.
- * @typedef {Object} SidebarProps
- * @property {boolean} isOpen - Whether the sidebar is currently open.
- * @property {(open: boolean) => void} setIsOpen - Callback to update the open/closed state.
- * @property {string|number} activeId - The `id` of the currently active item.
- * @property {(id: string|number) => void} onSelect - Callback triggered when a sidebar item is selected.
- * @property {SidebarSection[]} sections - Array of sidebar sections to render.
- * @property {UserInfo} [user] - Optional user information displayed at the bottom of the sidebar.
- * @property {React.ReactNode} [logo] - Optional logo element displayed in the header.
- * @property {React.ReactNode} [closeIcon] - Optional icon/button for closing the sidebar.
- * @property {number} [breakpoint=768] - Screen width (in px) below which the sidebar behaves as mobile (default: `768`).
- * @property {string} [width="15rem"] - Width of the sidebar when open (default: `15rem`).
- */
-
-/**
- * Responsive Sidebar component with support for sections, items, user info, and accessibility.
- * - On mobile screens (`window.innerWidth < breakpoint`), the body scroll is disabled when open.
- * - Sections can contain items with icons and labels.
- * - Displays optional user info block at the bottom.
- *
- * @function
- * @param {SidebarProps} props - The props for the component.
- * @returns {JSX.Element} The rendered sidebar.
- *
- * @example
- * <SideMenu
- *   isOpen={isOpen}
- *   setIsOpen={setIsOpen}
- *   activeId={activeId}
- *   onSelect={(id) => console.log("Selected:", id)}
- *   sections={[
- *     { title: "Main", items: [{ id: 1, text: "Dashboard" }, { id: 2, text: "Settings" }] }
- *   ]}
- *   user={{ username: "John Doe", email: "john@example.com" }}
- *   logo={<img src="/logo.png" alt="App Logo" />}
- *   closeIcon={<span>×</span>}
- * />
+ * SideMenu component
  */
 const SideMenu = ({
   isOpen,
@@ -90,7 +31,7 @@ const SideMenu = ({
     <>
       {isOpen && (
         <div
-          className="sidebar-overlay md:hidden"
+          className="fixed inset-0 bg-black/40 z-30 md:hidden"
           role="button"
           tabIndex={0}
           aria-label="Close sidebar overlay"
@@ -102,16 +43,15 @@ const SideMenu = ({
       )}
 
       <div
-        className={`sidebar ${isOpen ? "open" : "closed"}`}
+        className={`fixed top-0 left-0 z-40 h-screen bg-white border-r border-gray-200 shadow-md flex flex-col justify-between p-4 transform transition-transform duration-300 ease-in-out ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
         style={{ width }}
       >
         {/* Header */}
-        <div className="sidebar-header">
-          <div className="sidebar-logo">{logo}</div>
-          <button
-            onClick={() => setIsOpen(false)}
-            aria-label="Close Sidebar"
-          >
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-2">{logo}</div>
+          <button onClick={() => setIsOpen(false)} aria-label="Close Sidebar">
             {closeIcon}
           </button>
         </div>
@@ -119,9 +59,11 @@ const SideMenu = ({
         {/* Sections */}
         <div className="flex-1 overflow-y-auto">
           {sections.map((section, i) => (
-            <div key={i} className="sidebar-section">
+            <div key={i} className="mb-6">
               {section.title && (
-                <p className="sidebar-section-title">{section.title}</p>
+                <p className="text-[10px] text-gray-400 uppercase mb-2">
+                  {section.title}
+                </p>
               )}
               {section.items.map((item) => (
                 <SidebarItem
@@ -146,48 +88,17 @@ const SideMenu = ({
 
         {/* User Info */}
         {user?.email && (
-          <div className="sidebar-user">
-            <div className="sidebar-user-info">
+          <div className="flex items-center justify-between pt-4 mt-auto border-t border-gray-200">
+            <div className="flex items-center gap-2">
               {user.avatar}
-              <p className="sidebar-user-name">{user.username}</p>
+              <p className="text-sm text-gray-700 max-w-[130px] truncate">
+                {user.username}
+              </p>
             </div>
           </div>
         )}
       </div>
     </>
-  );
-};
-
-/**
- * SidebarItem component used within {@link SideMenu}.
- * Represents a clickable and keyboard-accessible sidebar item.
- *
- * @param {Object} props - Component props.
- * @param {React.ReactNode} [props.icon] - Optional icon to render before the text.
- * @param {string} props.text - Text label of the item.
- * @param {boolean} [props.active] - Whether the item is currently active.
- * @param {() => void} props.selectFunction - Callback when the item is selected.
- * @returns {JSX.Element} The rendered sidebar item.
- */
-const SidebarItem = ({ icon, text, active, selectFunction }) => {
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      selectFunction();
-    }
-  };
-
-  return (
-    <div
-      role="button"
-      tabIndex={0}
-      onClick={selectFunction}
-      onKeyDown={handleKeyDown}
-      className={`sidebar-item ${active ? "active" : ""}`}
-    >
-      {icon}
-      <span>{text}</span>
-    </div>
   );
 };
 
